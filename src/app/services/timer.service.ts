@@ -12,12 +12,15 @@ export class TimerService {
   private tickCount: number;
   private running: boolean;
   private isRunning: BehaviorSubject<boolean>;
+  private audio: HTMLAudioElement;
 
   constructor() {
     this.tickCount = 0;
     this.tick = new BehaviorSubject<number>(0);
     this.isRunning = new BehaviorSubject<boolean>(false);
     this.setRunning(false);
+    this.audio = new Audio('./assets/sound/mario_game_over.mp3');
+    this.audio.load();
   }
 
   register(): Observable<number> {
@@ -101,12 +104,17 @@ export class TimerService {
         this.tickCount = v;
         this.updateTick();
         if (v >= this.initialSecond) {
+          this.end();
           this.reset();
         }
       });
     } else {
       this.reset();
     }
+  }
+
+  end() {
+    this.audio.play();
   }
 
   stop() {

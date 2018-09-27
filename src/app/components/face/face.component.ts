@@ -36,10 +36,6 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  drawPlay(cx: CanvasRenderingContext2D, alpha: number) {
-
-  }
-
   drawTimer(cx: CanvasRenderingContext2D, second: number) {
     this.clearCanvas(cx);
     this.drawTime(cx, second, this.timer.getInitialTime());
