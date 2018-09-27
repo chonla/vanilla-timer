@@ -67,6 +67,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     const timeTick: string = this.secondToTime(second);
 
     cx.beginPath();
+    cx.lineCap = 'butt';
     cx.strokeStyle = '#f00';
     cx.lineWidth = this.timerRadius * this.faceProportion;
     cx.arc(0, 0, this.timerRadius * this.faceProportion / 2, from, to, true);
@@ -92,7 +93,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let i = 1; i <= count; i++) {
       cx.beginPath();
       cx.lineWidth = lengthToRadius * this.timerRadius;
-      // cx.lineCap = 'round';
+      cx.lineCap = 'round';
       cx.moveTo(0, -this.timerRadius * this.faceProportion);
       cx.lineTo(0, -this.timerRadius * (this.faceProportion - widthToRadius));
       cx.stroke();
