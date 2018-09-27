@@ -1,3 +1,31 @@
-<div>
-  <app-face [timer-radius]="200"></app-face>
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-1">
+      <button class="btn btn-warning btn-lg btn-block font-weight-bold" (click)="startTimer()" *ngIf="!isRunning"><span
+          class="fa fa-play"></span></button>
+      <button class="btn btn-secondary btn-lg btn-block font-weight-bold" (click)="stopTimer()" *ngIf="isRunning"><span
+          class="fa fa-stop"></span></button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(1)">+1</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(2)">+2</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(5)">+5</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(10)">+10</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(15)">+15</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(20)">+20</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(30)">+30</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="addTime(60)">60</button>
+    </div>
+    <div class="col-10">
+      <app-face [timer-radius]="200"></app-face>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-danger btn-lg btn-block font-weight-bold" (click)="clearTimer()"><span class="fa fa-trash"></span></button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(1)">-1</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(2)">-2</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(5)">-5</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(10)">-10</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(15)">-15</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(20)">-20</button>
+      <button class="btn btn-dark btn-lg btn-block font-weight-bold" (click)="subtractTime(30)">-30</button>
+    </div>
+  </div>
 </div>

@@ -28,15 +28,16 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.timer$ = this.timer.register().subscribe(v => {
       this.drawTimer(this.context, v);
     });
-
-    this.timer.setTime(15);
-    this.timer.start();
   }
 
   ngOnDestroy() {
     if (this.timer$) {
       this.timer$.unsubscribe();
     }
+  }
+
+  drawPlay(cx: CanvasRenderingContext2D, alpha: number) {
+
   }
 
   drawTimer(cx: CanvasRenderingContext2D, second: number) {
@@ -113,5 +114,27 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const time: string = `${min}:${sec}`;
     return time;
+  }
+
+  onTap($event) {
+    if ($event.tapCount === 2) {
+      this.timer.start();
+    }
+  }
+
+  onPanUp($event) {
+    this.timer.increaseMinute();
+  }
+
+  onPanDown($event) {
+    this.timer.decreaseMinute();
+  }
+
+  onPanLeft($event) {
+    this.timer.increaseSecond();
+  }
+
+  onPanRight($event) {
+    this.timer.decreaseSecond();
   }
 }
