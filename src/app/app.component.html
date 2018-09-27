@@ -1,8 +1,6 @@
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-1">
-      <button class="btn btn-warning btn-block" (click)="startTimer()" *ngIf="!isRunning"><span class="fa fa-play"></span></button>
-      <button class="btn btn-secondary btn-block" (click)="stopTimer()" *ngIf="isRunning"><span class="fa fa-stop"></span></button>
       <button class="btn btn-dark btn-block" (click)="addTime(1)">+1</button>
       <button class="btn btn-dark btn-block" (click)="addTime(2)">+2</button>
       <button class="btn btn-dark btn-block" (click)="addTime(5)">+5</button>
@@ -11,12 +9,14 @@
       <button class="btn btn-dark btn-block" (click)="addTime(20)">+20</button>
       <button class="btn btn-dark btn-block" (click)="addTime(30)">+30</button>
       <button class="btn btn-dark btn-block" (click)="addTime(60)">60</button>
+      <button class="btn btn-warning btn-block" (click)="startTimer()" *ngIf="!isRunning"><span class="fa fa-play"></span></button>
+      <button class="btn btn-secondary btn-block" (click)="stopTimer()" *ngIf="isRunning"><span class="fa fa-stop"></span></button>
+      <button class="btn btn-danger btn-block" (click)="clearTimer()"><span class="fa fa-trash"></span></button>
     </div>
     <div class="col-10">
       <app-face [timer-radius]="300"></app-face>
     </div>
     <div class="col-1">
-      <button class="btn btn-danger btn-block" (click)="clearTimer()"><span class="fa fa-trash"></span></button>
       <button class="btn btn-dark btn-block" (click)="subtractTime(1)">-1</button>
       <button class="btn btn-dark btn-block" (click)="subtractTime(2)">-2</button>
       <button class="btn btn-dark btn-block" (click)="subtractTime(5)">-5</button>
