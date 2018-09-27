@@ -34,6 +34,7 @@ export class TimerService {
   setTime(sec: number) {
     if (!this.running) {
       this.initialSecond = sec;
+      this.updateTick();
     }
   }
 

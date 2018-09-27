@@ -12,7 +12,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input('timer-radius') timerRadius: number;
   @ViewChild('face') faceCanvas: ElementRef;
   private context: CanvasRenderingContext2D;
-  private faceProportion: number = 0.98;
+  private faceProportion: number = 0.8;
   private timer$: Subscription;
 
   constructor(private timer: TimerService) { }
@@ -53,13 +53,14 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.drawMinute(cx);
     this.drawHour(cx);
     this.drawPin(cx);
+    this.drawNumbers(cx);
   }
 
   drawTime(cx: CanvasRenderingContext2D, second: number, initial: number) {
     const from: number = -0.5 * Math.PI;
     const to: number = from - (2 * Math.PI) * (second / 3600);
     const toInitial: number = from - (2 * Math.PI) * (initial / 3600);
-    const fontSize: number = Math.round(this.timerRadius * 0.3);
+    const fontSize: number = Math.round(this.timerRadius * 0.2);
     const fontOffset: number = (this.timerRadius * 0.15) + fontSize;
     const timeTick: string = this.secondToTime(second);
 
@@ -84,6 +85,24 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     cx.textAlign = 'center';
 
     cx.fillText(`${timeTick}`, 0, fontOffset);
+  }
+
+  drawNumbers(cx: CanvasRenderingContext2D) {
+    const fontSize: number = Math.round(this.timerRadius * 0.1);
+
+    cx.font = `${fontSize}px Arial`;
+    cx.textBaseline = 'middle';
+    cx.textAlign = 'center';
+    for (let num = 0; num < 12; num++) {
+      const angle = -num * Math.PI / 6;
+      cx.rotate(angle);
+      cx.translate(0, -this.timerRadius * 0.9);
+      cx.rotate(-angle);
+      cx.fillText((num * 5).toString(), 0, 0);
+      cx.rotate(angle);
+      cx.translate(0, this.timerRadius * 0.9);
+      cx.rotate(-angle);
+    }
   }
 
   drawPin(cx: CanvasRenderingContext2D) {

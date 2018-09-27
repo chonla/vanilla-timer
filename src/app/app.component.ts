@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'timer';
 
   public isRunning: boolean;
+  private recentlyUsedSecond: number;
 
   constructor(private timer: TimerService) {
     this.isRunning = false;
@@ -19,6 +20,7 @@ export class AppComponent {
   }
 
   startTimer() {
+    this.recentlyUsedSecond = this.timer.getInitialTime();
     this.timer.start();
   }
 
@@ -36,5 +38,9 @@ export class AppComponent {
 
   subtractTime(minute: number) {
     this.timer.decreaseMinuteBy(minute);
+  }
+
+  lastUsed() {
+    this.timer.setTime(this.recentlyUsedSecond);
   }
 }
