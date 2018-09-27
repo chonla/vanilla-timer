@@ -34,6 +34,10 @@ export class TimerService {
     }
   }
 
+  getInitialTime(): number {
+    return this.initialSecond;
+  }
+
   increaseSecond() {
     if (!this.running) {
       if (this.initialSecond < 3600) {

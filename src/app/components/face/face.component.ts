@@ -42,7 +42,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   drawTimer(cx: CanvasRenderingContext2D, second: number) {
     this.clearCanvas(cx);
-    this.drawTime(cx, second);
+    this.drawTime(cx, second, this.timer.getInitialTime());
     this.drawFace(this.context);
   }
 
@@ -59,17 +59,27 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.drawPin(cx);
   }
 
-  drawTime(cx: CanvasRenderingContext2D, second: number) {
+  drawTime(cx: CanvasRenderingContext2D, second: number, initial: number) {
     const from: number = -0.5 * Math.PI;
     const to: number = from - (2 * Math.PI) * (second / 3600);
+    const toInitial: number = from - (2 * Math.PI) * (initial / 3600);
     const fontSize: number = Math.round(this.timerRadius * 0.3);
     const fontOffset: number = (this.timerRadius * 0.15) + fontSize;
     const timeTick: string = this.secondToTime(second);
 
+    // draw initial time
     cx.beginPath();
     cx.lineCap = 'butt';
-    cx.strokeStyle = '#f00';
     cx.lineWidth = this.timerRadius * this.faceProportion;
+    cx.strokeStyle = '#ddd';
+    cx.arc(0, 0, this.timerRadius * this.faceProportion / 2, from, toInitial, true);
+    cx.stroke();
+
+    // draw current time
+    cx.beginPath();
+    cx.lineCap = 'butt';
+    cx.lineWidth = this.timerRadius * this.faceProportion;
+    cx.strokeStyle = '#f00';
     cx.arc(0, 0, this.timerRadius * this.faceProportion / 2, from, to, true);
     cx.stroke();
 
