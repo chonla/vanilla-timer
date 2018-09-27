@@ -1,3 +1,6 @@
 canvas {
   cursor: pointer;
+  padding: 0;
+  margin: auto;
+  display: block;
 }
