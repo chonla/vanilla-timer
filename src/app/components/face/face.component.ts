@@ -55,7 +55,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     const fontOffset: number = (this.timerRadius * 0.3) + fontSize;
 
     cx.moveTo(0, 0);
-    cx.font = `${fontSize}px 'Times News Roman'`;
+    cx.font = `${fontSize}px Arial`;
     cx.textAlign = 'center';
     cx.textBaseline = 'bottom';
     cx.fillText(`BAYO's Timer`, 0, - fontOffset);
