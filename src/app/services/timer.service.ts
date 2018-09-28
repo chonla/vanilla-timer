@@ -13,11 +13,15 @@ export class TimerService {
   private running: boolean;
   private isRunning: BehaviorSubject<boolean>;
   private audio: HTMLAudioElement;
+  private volumeOn: boolean;
+  private hasSound: BehaviorSubject<boolean>;
 
   constructor() {
     this.tickCount = 0;
+    this.volumeOn = true;
     this.tick = new BehaviorSubject<number>(0);
     this.isRunning = new BehaviorSubject<boolean>(false);
+    this.hasSound = new BehaviorSubject<boolean>(this.volumeOn);
     this.setRunning(false);
     this.audio = new Audio('./assets/sound/mario_game_over.mp3');
     this.audio.load();
@@ -31,11 +35,19 @@ export class TimerService {
     return this.isRunning.asObservable();
   }
 
+  sound(): Observable<boolean> {
+    return this.hasSound.asObservable();
+  }
+
   setTime(sec: number) {
     if (!this.running) {
       this.initialSecond = sec;
       this.updateTick();
     }
+  }
+
+  setVolume(enable: boolean) {
+    this.volumeOn = enable;
   }
 
   getInitialTime(): number {
@@ -115,7 +127,9 @@ export class TimerService {
   }
 
   end() {
-    this.audio.play();
+    if (this.volumeOn) {
+      this.audio.play();
+    }
   }
 
   stop() {
@@ -139,5 +153,18 @@ export class TimerService {
   setRunning(running: boolean) {
     this.running = running;
     this.isRunning.next(this.running);
+  }
+
+  mute() {
+    this.setSound(false);
+  }
+
+  unmute() {
+    this.setSound(true);
+  }
+
+  setSound(enable: boolean) {
+    this.volumeOn = enable;
+    this.hasSound.next(this.volumeOn);
   }
 }

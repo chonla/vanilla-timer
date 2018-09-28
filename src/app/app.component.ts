@@ -1,22 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TimerService } from './services/timer.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'timer';
 
   public isRunning: boolean;
   private recentlyUsedSecond: number;
+  public isMute: boolean;
+  private running$: Subscription;
+  private sound$: Subscription;
 
   constructor(private timer: TimerService) {
     this.isRunning = false;
-    this.timer.state().subscribe(s => {
+    this.isMute = false;
+    this.running$ = this.timer.state().subscribe(s => {
       this.isRunning = s;
     });
+    this.sound$ = this.timer.sound().subscribe(s => {
+      this.isMute = !s;
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.running$) {
+      this.running$.unsubscribe();
+    }
+    if (this.sound$) {
+      this.sound$.unsubscribe();
+    }
   }
 
   startTimer() {
@@ -43,4 +60,13 @@ export class AppComponent {
   lastUsed() {
     this.timer.setTime(this.recentlyUsedSecond);
   }
+
+  mute() {
+    this.timer.mute();
+  }
+
+  unmute() {
+    this.timer.unmute();
+  }
+
 }

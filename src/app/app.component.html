@@ -25,6 +25,8 @@
       <button class="btn btn-dark btn-block" title="-15 minute" (click)="subtractTime(15)">-15</button>
       <button class="btn btn-dark btn-block" title="-20 minute" (click)="subtractTime(20)">-20</button>
       <button class="btn btn-dark btn-block" title="-30 minute" (click)="subtractTime(30)">-30</button>
+      <button class="btn btn-warning btn-block" title="mute" (click)="mute()" *ngIf="!isMute"><span class="fa fa-volume-up"></span></button>
+      <button class="btn btn-secondary btn-block" title="unmute" (click)="unmute()" *ngIf="isMute"><span class="fa fa-volume-off"></span></button>
     </div>
   </div>
 </div>
