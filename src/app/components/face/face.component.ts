@@ -83,7 +83,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     cx.moveTo(0, 0);
     cx.font = `${fontSize}px Arial`;
     cx.textAlign = 'center';
-
+    cx.textBaseline = 'bottom';
     cx.fillText(`${timeTick}`, 0, fontOffset);
   }
 

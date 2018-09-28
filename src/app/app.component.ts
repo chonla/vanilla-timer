@@ -19,6 +19,7 @@ export class AppComponent implements OnDestroy {
   constructor(private timer: TimerService) {
     this.isRunning = false;
     this.isMute = false;
+    this.recentlyUsedSecond = 0;
     this.running$ = this.timer.state().subscribe(s => {
       this.isRunning = s;
     });
