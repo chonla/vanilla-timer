@@ -1,8 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TimerService } from './services/timer.service';
 import { Subscription } from 'rxjs';
-import { faPlay, faStop, faTrash, faHistory, faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay';
+import { faStop } from '@fortawesome/free-solid-svg-icons/faStop';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faHistory } from '@fortawesome/free-solid-svg-icons/faHistory';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import { faVolumeOff } from '@fortawesome/free-solid-svg-icons/faVolumeOff';
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
