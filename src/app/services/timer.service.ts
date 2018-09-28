@@ -119,13 +119,21 @@ export class TimerService {
           this.updateTick();
           if (v >= this.initialSecond) {
             this.end();
-            this.reset();
+            this.delayReset();
           }
         });
       } else {
         this.reset();
       }
     }
+  }
+
+  delayReset() {
+    // to delay reset for visualizing purpose, used in complete running timer
+    const source = timer(800);
+    source.subscribe(() => {
+      this.reset();
+    });
   }
 
   end() {
