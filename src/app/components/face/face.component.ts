@@ -40,6 +40,7 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clearCanvas(cx);
     this.drawTime(cx, second, this.timer.getInitialTime());
     this.drawFace(this.context);
+    this.drawBranding(this.context);
   }
 
   clearCanvas(cx: CanvasRenderingContext2D) {
@@ -47,6 +48,17 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     cx.setTransform(1, 0, 0, 1, 0, 0);
     cx.clearRect(0, 0, cx.canvas.width, cx.canvas.height);
     cx.restore();
+  }
+
+  drawBranding(cx: CanvasRenderingContext2D) {
+    const fontSize: number = Math.round(this.timerRadius * 0.05);
+    const fontOffset: number = (this.timerRadius * 0.3) + fontSize;
+
+    cx.moveTo(0, 0);
+    cx.font = `${fontSize}px 'Times News Roman'`;
+    cx.textAlign = 'center';
+    cx.textBaseline = 'bottom';
+    cx.fillText(`BAYO's Timer`, 0, - fontOffset);
   }
 
   drawFace(cx: CanvasRenderingContext2D) {
