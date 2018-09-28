@@ -109,20 +109,22 @@ export class TimerService {
   }
 
   start() {
-    if (!this.running) {
-      this.setRunning(true);
-      this.tickCount = 0;
-      const source = timer(0, this.oneSec);
-      this.timer$ = source.subscribe(v => {
-        this.tickCount = v;
-        this.updateTick();
-        if (v >= this.initialSecond) {
-          this.end();
-          this.reset();
-        }
-      });
-    } else {
-      this.reset();
+    if (this.initialSecond > 0) {
+      if (!this.running) {
+        this.setRunning(true);
+        this.tickCount = 0;
+        const source = timer(0, this.oneSec);
+        this.timer$ = source.subscribe(v => {
+          this.tickCount = v;
+          this.updateTick();
+          if (v >= this.initialSecond) {
+            this.end();
+            this.reset();
+          }
+        });
+      } else {
+        this.reset();
+      }
     }
   }
 
