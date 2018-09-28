@@ -9,10 +9,18 @@
       <button class="btn btn-dark btn-block" title="+20 minute" (click)="addTime(20)">+20</button>
       <button class="btn btn-dark btn-block" title="+30 minute" (click)="addTime(30)">+30</button>
       <button class="btn btn-dark btn-block" title="set to 1 hour" (click)="addTime(60)">60</button>
-      <button class="btn btn-warning btn-block" title="start" (click)="startTimer()" *ngIf="!isRunning"><span class="fa fa-play"></span></button>
-      <button class="btn btn-secondary btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning"><span class="fa fa-stop"></span></button>
-      <button class="btn btn-danger btn-block" title="clear" (click)="clearTimer()"><span class="fa fa-trash"></span></button>
-      <button class="btn btn-dark btn-block" title="set to last used" (click)="lastUsed()"><span class="fa fa-history"></span></button>
+      <button class="btn btn-warning btn-block" title="start" (click)="startTimer()" *ngIf="!isRunning">
+        <fa-icon [icon]="faPlay"></fa-icon>
+      </button>
+      <button class="btn btn-secondary btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning">
+        <fa-icon [icon]="faStop"></fa-icon>
+      </button>
+      <button class="btn btn-danger btn-block" title="clear" (click)="clearTimer()">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+      <button class="btn btn-dark btn-block" title="set to last used" (click)="lastUsed()">
+        <fa-icon [icon]="faHistory"></fa-icon>
+      </button>
     </div>
     <div class="col-10">
       <app-face [timer-radius]="300"></app-face>
@@ -25,8 +33,15 @@
       <button class="btn btn-dark btn-block" title="-15 minute" (click)="subtractTime(15)">-15</button>
       <button class="btn btn-dark btn-block" title="-20 minute" (click)="subtractTime(20)">-20</button>
       <button class="btn btn-dark btn-block" title="-30 minute" (click)="subtractTime(30)">-30</button>
-      <button class="btn btn-warning btn-block" title="mute" (click)="mute()" *ngIf="!isMute"><span class="fa fa-volume-up"></span></button>
-      <button class="btn btn-secondary btn-block" title="unmute" (click)="unmute()" *ngIf="isMute"><span class="fa fa-volume-off"></span></button>
+      <button class="btn btn-warning btn-block" title="mute" (click)="mute()" *ngIf="!isMute">
+        <fa-icon [icon]="faVolumeUp"></fa-icon>
+      </button>
+      <button class="btn btn-secondary btn-block" title="unmute" (click)="unmute()" *ngIf="isMute">
+        <fa-icon [icon]="faVolumeOff"></fa-icon>
+      </button>
+      <a class="btn btn-success btn-block" href="https://github.com/chonla/timer" target="_blank">
+        <fa-icon [icon]="faGithub"></fa-icon>
+      </a>
     </div>
   </div>
 </div>

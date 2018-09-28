@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TimerService } from './services/timer.service';
 import { Subscription } from 'rxjs';
-
+import { faPlay, faStop, faTrash, faHistory, faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnDestroy {
   title = 'timer';
+  faPlay = faPlay;
+  faStop = faStop;
+  faTrash = faTrash;
+  faHistory = faHistory;
+  faVolumeUp = faVolumeUp;
+  faVolumeOff = faVolumeOff;
+  faGithub = faGithub;
 
   public isRunning: boolean;
   private recentlyUsedSecond: number;
