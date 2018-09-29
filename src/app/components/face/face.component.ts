@@ -161,11 +161,11 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onPanUp($event) {
-    this.timer.increaseMinute();
+    this.timer.decreaseMinute();
   }
 
   onPanDown($event) {
-    this.timer.decreaseMinute();
+    this.timer.increaseMinute();
   }
 
   onPanLeft($event) {
