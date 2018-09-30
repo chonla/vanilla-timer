@@ -13,9 +13,14 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('face') faceCanvas: ElementRef;
   private context: CanvasRenderingContext2D;
   private faceProportion: number = 0.8;
+  private secondProportion: number = 0.5;
   private timer$: Subscription;
+  private isRunning: boolean;
+  private running$: Subscription;
 
-  constructor(private timer: TimerService) { }
+  constructor(private timer: TimerService) {
+    this.isRunning = false;
+  }
 
   ngOnInit() {
 
@@ -25,6 +30,9 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.context = (<HTMLCanvasElement>this.faceCanvas.nativeElement).getContext('2d');
     this.context.translate(this.timerRadius, this.timerRadius);
 
+    this.running$ = this.timer.state().subscribe(v => {
+      this, this.isRunning = v;
+    });
     this.timer$ = this.timer.register().subscribe(v => {
       this.drawTimer(this.context, v);
     });
@@ -34,11 +42,18 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.timer$) {
       this.timer$.unsubscribe();
     }
+    if (this.running$) {
+      this.running$.unsubscribe();
+    }
   }
 
   drawTimer(cx: CanvasRenderingContext2D, second: number) {
     this.clearCanvas(cx);
     this.drawTime(cx, second, this.timer.getInitialTime());
+    if (this.isRunning && second <= 60) {
+      this.drawLastMinute(cx, second);
+    }
+    this.drawTimeText(cx, second);
     this.drawFace(this.context);
     this.drawBranding(this.context);
   }
@@ -72,9 +87,6 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     const from: number = -0.5 * Math.PI;
     const to: number = from - (2 * Math.PI) * (second / 3600);
     const toInitial: number = from - (2 * Math.PI) * (initial / 3600);
-    const fontSize: number = Math.round(this.timerRadius * 0.2);
-    const fontOffset: number = (this.timerRadius * 0.15) + fontSize;
-    const timeTick: string = this.secondToTime(second);
 
     // draw initial time
     cx.beginPath();
@@ -88,9 +100,27 @@ export class FaceComponent implements OnInit, AfterViewInit, OnDestroy {
     cx.beginPath();
     cx.lineCap = 'butt';
     cx.lineWidth = this.timerRadius * this.faceProportion;
-    cx.strokeStyle = '#f00';
+    cx.strokeStyle = '#fb0000';
     cx.arc(0, 0, this.timerRadius * this.faceProportion / 2, from, to, true);
     cx.stroke();
+  }
+
+  drawLastMinute(cx: CanvasRenderingContext2D, second: number) {
+    const from: number = -0.5 * Math.PI;
+    const to: number = from - (2 * Math.PI) * (second / 60);
+
+    cx.beginPath();
+    cx.lineCap = 'butt';
+    cx.lineWidth = this.timerRadius * this.secondProportion;
+    cx.strokeStyle = '#c70000';
+    cx.arc(0, 0, this.timerRadius * this.secondProportion / 2, from, to, true);
+    cx.stroke();
+  }
+
+  drawTimeText(cx: CanvasRenderingContext2D, second: number) {
+    const fontSize: number = Math.round(this.timerRadius * 0.2);
+    const fontOffset: number = (this.timerRadius * 0.15) + fontSize;
+    const timeTick: string = this.secondToTime(second);
 
     cx.moveTo(0, 0);
     cx.font = `${fontSize}px Arial`;
