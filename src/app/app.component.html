@@ -1,24 +1,24 @@
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-1">
-      <button class="btn btn-dark btn-block" title="+1 minute" (click)="addTime(1)">+1</button>
-      <button class="btn btn-dark btn-block" title="+2 minute" (click)="addTime(2)">+2</button>
-      <button class="btn btn-dark btn-block" title="+5 minute" (click)="addTime(5)">+5</button>
-      <button class="btn btn-dark btn-block" title="+10 minute" (click)="addTime(10)">+10</button>
-      <button class="btn btn-dark btn-block" title="+15 minute" (click)="addTime(15)">+15</button>
-      <button class="btn btn-dark btn-block" title="+20 minute" (click)="addTime(20)">+20</button>
-      <button class="btn btn-dark btn-block" title="+30 minute" (click)="addTime(30)">+30</button>
-      <button class="btn btn-dark btn-block" title="set to 1 hour" (click)="addTime(60)">60</button>
+      <button class="btn btn-dark btn-block" title="+1 minute" (click)="addTime(1)" [disabled]="isRunning">+1</button>
+      <button class="btn btn-dark btn-block" title="+2 minute" (click)="addTime(2)" [disabled]="isRunning">+2</button>
+      <button class="btn btn-dark btn-block" title="+5 minute" (click)="addTime(5)" [disabled]="isRunning">+5</button>
+      <button class="btn btn-dark btn-block" title="+10 minute" (click)="addTime(10)" [disabled]="isRunning">+10</button>
+      <button class="btn btn-dark btn-block" title="+15 minute" (click)="addTime(15)" [disabled]="isRunning">+15</button>
+      <button class="btn btn-dark btn-block" title="+20 minute" (click)="addTime(20)" [disabled]="isRunning">+20</button>
+      <button class="btn btn-dark btn-block" title="+30 minute" (click)="addTime(30)" [disabled]="isRunning">+30</button>
+      <button class="btn btn-dark btn-block" title="set to 1 hour" (click)="addTime(60)" [disabled]="isRunning">60</button>
       <button class="btn btn-warning btn-block" title="start" (click)="startTimer()" *ngIf="!isRunning">
         <fa-icon [icon]="faPlay"></fa-icon>
       </button>
-      <button class="btn btn-secondary btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning">
+      <button class="btn btn-warning btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning">
         <fa-icon [icon]="faStop"></fa-icon>
       </button>
-      <button class="btn btn-danger btn-block" title="clear" (click)="clearTimer()">
+      <button class="btn btn-danger btn-block" title="clear" (click)="clearTimer()" [disabled]="isRunning">
         <fa-icon [icon]="faTrash"></fa-icon>
       </button>
-      <button class="btn btn-dark btn-block" title="set to last used" (click)="lastUsed()">
+      <button class="btn btn-dark btn-block" title="set to last used" (click)="lastUsed()" [disabled]="isRunning">
         <fa-icon [icon]="faHistory"></fa-icon>
       </button>
     </div>
@@ -26,13 +26,13 @@
       <app-face [timer-radius]="300"></app-face>
     </div>
     <div class="col-1">
-      <button class="btn btn-dark btn-block" title="-1 minute" (click)="subtractTime(1)">-1</button>
-      <button class="btn btn-dark btn-block" title="-2 minute" (click)="subtractTime(2)">-2</button>
-      <button class="btn btn-dark btn-block" title="-5 minute" (click)="subtractTime(5)">-5</button>
-      <button class="btn btn-dark btn-block" title="-10 minute" (click)="subtractTime(10)">-10</button>
-      <button class="btn btn-dark btn-block" title="-15 minute" (click)="subtractTime(15)">-15</button>
-      <button class="btn btn-dark btn-block" title="-20 minute" (click)="subtractTime(20)">-20</button>
-      <button class="btn btn-dark btn-block" title="-30 minute" (click)="subtractTime(30)">-30</button>
+      <button class="btn btn-dark btn-block" title="-1 minute" (click)="subtractTime(1)" [disabled]="isRunning">-1</button>
+      <button class="btn btn-dark btn-block" title="-2 minute" (click)="subtractTime(2)" [disabled]="isRunning">-2</button>
+      <button class="btn btn-dark btn-block" title="-5 minute" (click)="subtractTime(5)" [disabled]="isRunning">-5</button>
+      <button class="btn btn-dark btn-block" title="-10 minute" (click)="subtractTime(10)" [disabled]="isRunning">-10</button>
+      <button class="btn btn-dark btn-block" title="-15 minute" (click)="subtractTime(15)" [disabled]="isRunning">-15</button>
+      <button class="btn btn-dark btn-block" title="-20 minute" (click)="subtractTime(20)" [disabled]="isRunning">-20</button>
+      <button class="btn btn-dark btn-block" title="-30 minute" (click)="subtractTime(30)" [disabled]="isRunning">-30</button>
       <button class="btn btn-warning btn-block" title="mute" (click)="mute()" *ngIf="!isMute">
         <fa-icon [icon]="faVolumeUp"></fa-icon>
       </button>
