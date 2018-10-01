@@ -12,7 +12,7 @@
       <button class="btn btn-warning btn-block" title="start" (click)="startTimer()" *ngIf="!isRunning">
         <fa-icon [icon]="faPlay"></fa-icon>
       </button>
-      <button class="btn btn-warning btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning">
+      <button class="btn btn-danger btn-block" title="stop" (click)="stopTimer()" *ngIf="isRunning">
         <fa-icon [icon]="faStop"></fa-icon>
       </button>
       <button class="btn btn-danger btn-block" title="clear" (click)="clearTimer()" [disabled]="isRunning">
