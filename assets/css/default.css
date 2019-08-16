@@ -18,3 +18,34 @@
     color: #ff5555;
     font-weight: bold;
 }
+
+/* Theme overrides */
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,1);
+}
+
+svg.svg-btn-dark {
+  stroke: rgba(255,255,255,1);
+  fill: rgba(255,255,255,1);
+}
+
+svg.svg-btn-dark:hover {
+  stroke: rgba(255,255,255,0.75);
+  fill: rgba(255,255,255,0.75);
+}
+
+svg.svg-btn {
+  stroke-linejoin: round;
+  stroke-linecap:round;
+}
+
+svg.svg-btn.svg-btn-small {
+  stroke-width: 6;
+  width: 24px;
+  height: 24px;
+}
+
+.svg-btn.svg-icon-play {
+
+}
