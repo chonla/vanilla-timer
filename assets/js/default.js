@@ -26,6 +26,13 @@ Number.prototype.friendly = () => {
   return toFriendlyTime(this);
 }
 
+function drawSlot(count) {
+  for (var i = 0; i < count; i++) {
+    $('#time-slot').append($('<li class="slot"/>'));
+  }
+  $('#time-slot slot:first-child').addClass('active');
+}
+
 $(() => {
   $('#timer-starter').attr('disabled', 'disabled');
 
@@ -34,6 +41,7 @@ $(() => {
       switch (e.name) {
         case 'initialized':
           $('#timer-starter').removeAttr('disabled');
+          drawSlot(e.seq.length);
           break;
         case 'started':
           $('#timer-starter').attr('disabled', 'disabled');

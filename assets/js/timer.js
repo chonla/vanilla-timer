@@ -21,7 +21,8 @@ Timer = function () {
       });
       if (t.seq.length > 0) {
         t.eventSubject.next({
-          name: 'initialized'
+          name: 'initialized',
+          seq: t.seq
         });
       }
     },
