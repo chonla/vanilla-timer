@@ -77,6 +77,18 @@ Timer = function () {
         name: 'stopped'
       });
     },
+    pause: () => {
+      if (t.sub$) {
+        t.sub$.unsubscribe();
+      }
+      t.eventSubject.next({
+        seq: t.seq,
+        cursor: 0,
+        tick: t.counter,
+        tickLeft: t.seq[t.seqCursor] - t.counter,
+        name: 'paused'
+      });
+    },
     event: () => {
       return t.eventSubject;
     },

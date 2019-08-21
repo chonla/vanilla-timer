@@ -10,6 +10,10 @@ function startTimer() {
   timer.start();
 }
 
+function pauseTimer() {
+  timer.pause();
+}
+
 function stopTimer() {
   timer.stop();
 }
@@ -41,6 +45,7 @@ function drawSlot(count, active) {
 $(() => {
   $('[role="startTimer"]').attr('disabled', 'disabled');
   $('[role="stopTimer"]').attr('disabled', 'disabled');
+  $('[role="pauseTimer"]').attr('disabled', 'disabled');
 
   timer.event().subscribe(e => {
     if (e) {
@@ -48,11 +53,13 @@ $(() => {
         case 'initialized':
           $('[role="startTimer"]').removeAttr('disabled');
           $('[role="stopTimer"]').attr('disabled', 'disabled');
+          $('[role="pauseTimer"]').attr('disabled', 'disabled');
           $('#time-left').text(toFriendlyTime(e.tickLeft));
           drawSlot(e.seq.length, 0);
           break;
         case 'started':
           $('[role="startTimer"]').attr('disabled', 'disabled');
+          $('[role="pauseTimer"]').removeAttr('disabled');
           $('[role="stopTimer"]').removeAttr('disabled');
           break;
         case 'tick':
@@ -62,7 +69,13 @@ $(() => {
           $('#time-left').text(toFriendlyTime(e.tickLeft));
           drawSlot(e.seq.length, 0);
           $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="pauseTimer"]').attr('disabled', 'disabled');
           $('[role="stopTimer"]').attr('disabled', 'disabled');
+          break;
+        case 'paused':
+          $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="pauseTimer"]').attr('disabled', 'disabled');
+          $('[role="stopTimer"]').removeAttr('disabled');
           break;
         case 'ended':
           drawSlot(e.seq.length, e.cursor);
@@ -70,6 +83,7 @@ $(() => {
         case 'finally':
           drawSlot(e.seq.length, e.cursor);
           $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="pauseTimer"]').attr('disabled', 'disabled');
           $('[role="stopTimer"]').attr('disabled', 'disabled');
           break;
       }
@@ -78,5 +92,6 @@ $(() => {
 
   $('[role="setTimer"]').click(setTimerSequence);
   $('[role="startTimer"]').click(startTimer);
+  $('[role="pauseTimer"]').click(pauseTimer);
   $('[role="stopTimer"]').click(stopTimer);
 });
