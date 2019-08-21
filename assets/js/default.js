@@ -10,6 +10,10 @@ function startTimer() {
   timer.start();
 }
 
+function stopTimer() {
+  timer.stop();
+}
+
 window.onunload = () => {
   timer.stop();
 }
@@ -35,27 +39,38 @@ function drawSlot(count, active) {
 }
 
 $(() => {
-  $('#timer-starter').attr('disabled', 'disabled');
+  $('[role="startTimer"]').attr('disabled', 'disabled');
+  $('[role="stopTimer"]').attr('disabled', 'disabled');
 
   timer.event().subscribe(e => {
     if (e) {
       switch (e.name) {
         case 'initialized':
-          $('#timer-starter').removeAttr('disabled');
+          $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="stopTimer"]').attr('disabled', 'disabled');
+          $('#time-left').text(toFriendlyTime(e.tickLeft));
           drawSlot(e.seq.length, 0);
           break;
         case 'started':
-          $('#timer-starter').attr('disabled', 'disabled');
+          $('[role="startTimer"]').attr('disabled', 'disabled');
+          $('[role="stopTimer"]').removeAttr('disabled');
           break;
         case 'tick':
           $('#time-left').text(toFriendlyTime(e.tickLeft));
+          break;
+        case 'stopped':
+          $('#time-left').text(toFriendlyTime(e.tickLeft));
+          drawSlot(e.seq.length, 0);
+          $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="stopTimer"]').attr('disabled', 'disabled');
           break;
         case 'ended':
           drawSlot(e.seq.length, e.cursor);
           break;
         case 'finally':
           drawSlot(e.seq.length, e.cursor);
-          $('#timer-starter').removeAttr('disabled');
+          $('[role="startTimer"]').removeAttr('disabled');
+          $('[role="stopTimer"]').attr('disabled', 'disabled');
           break;
       }
     }
@@ -63,4 +78,5 @@ $(() => {
 
   $('[role="setTimer"]').click(setTimerSequence);
   $('[role="startTimer"]').click(startTimer);
+  $('[role="stopTimer"]').click(stopTimer);
 });

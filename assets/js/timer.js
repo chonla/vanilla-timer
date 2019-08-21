@@ -12,16 +12,12 @@ Timer = function () {
       t.stop();
       t.seq = seq;
       t.seqCursor = 0;
-      t.eventSubject.next({
-        name: 'tick',
-        tick: 0,
-        tickLeft: t.seq[t.seqCursor] - t.counter,
-        cursor: t.seqCursor,
-        seq: t.seq
-      });
       if (t.seq.length > 0) {
         t.eventSubject.next({
           name: 'initialized',
+          tick: 0,
+          tickLeft: t.seq[t.seqCursor] - t.counter,
+          cursor: t.seqCursor,
           seq: t.seq
         });
       }
@@ -47,7 +43,7 @@ Timer = function () {
               cursor: 0,
               name: 'finally'
             });
-            t.reset();
+            t.stop();
           } else {
             t.eventSubject.next({
               name: 'ended',
@@ -64,15 +60,22 @@ Timer = function () {
     reset: () => {
       t.counter = 0;
       t.seqCursor = 0;
+      t.seq = [];
       t.sub$.unsubscribe();
     },
     stop: () => {
       if (t.sub$) {
         t.counter = 0;
-        t.seq = [];
         t.seqCursor = 0;
         t.sub$.unsubscribe();
       }
+      t.eventSubject.next({
+        seq: t.seq,
+        cursor: 0,
+        tick: t.counter,
+        tickLeft: t.seq[t.seqCursor] - t.counter,
+        name: 'stopped'
+      });
     },
     event: () => {
       return t.eventSubject;
