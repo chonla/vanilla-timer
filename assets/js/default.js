@@ -42,6 +42,58 @@ function drawSlot(count, active) {
   $(`#time-slots > .slot:nth-child(${active + 1})`).addClass('active');
 }
 
+function applyTimeSeries() {
+  const customTimeSeries = $('#customTimeSeries').val();
+  if (tryParseTimeSeries(customTimeSeries)) {
+    const timeSeq = parseTimeSeries(customTimeSeries);
+    timer.set(timeSeq);
+    $('#customTimeSeries').removeClass('is-invalid');
+  } else {
+    $('#customTimeSeries').addClass('is-invalid');
+  }
+}
+
+function parseTimeSeries(s) {
+  const seq = s.split(',').map($.trim).map(timeElementToSecond);
+  return seq;
+}
+
+function timeElementToSecond(t) {
+  const timeMultiplier = {
+    's': 1,
+    'm': 60,
+    'h': 3600
+  };
+
+  if (/^\d+$/.test(t)) {
+    return parseInt(t, 10);
+  }
+
+  if (/^\d+[hms]$/.test(t)) {
+    return parseInt(t.substr(0, t.length - 1), 10) * timeMultiplier[t[t.length - 1]];
+  }
+
+  return 0;
+}
+
+function tryParseTimeSeries(s) {
+  if (s === '') {
+    return false;
+  }
+  return s.split(',').filter(isInvalidTimeElement).length === 0;
+}
+
+function isInvalidTimeElement(t) {
+  t = $.trim(t);
+  if (/^\d+$/.test(t)) {
+    return false;
+  }
+  if (/^\d+[hms]$/.test(t)) {
+    return false;
+  }
+  return true;
+}
+
 $(() => {
   $('[role="startTimer"]').attr('disabled', 'disabled');
   $('[role="stopTimer"]').attr('disabled', 'disabled');
@@ -94,4 +146,5 @@ $(() => {
   $('[role="startTimer"]').click(startTimer);
   $('[role="pauseTimer"]').click(pauseTimer);
   $('[role="stopTimer"]').click(stopTimer);
+  $('#applyCustomTimeSeries').click(applyTimeSeries);
 });
