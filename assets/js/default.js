@@ -26,11 +26,12 @@ Number.prototype.friendly = () => {
   return toFriendlyTime(this);
 }
 
-function drawSlot(count) {
+function drawSlot(count, active) {
+  $('#time-slots').empty();
   for (var i = 0; i < count; i++) {
-    $('#time-slot').append($('<li class="slot"/>'));
+    $('#time-slots').append($('<li class="slot"/>'));
   }
-  $('#time-slot slot:first-child').addClass('active');
+  $(`#time-slots > .slot:nth-child(${active + 1})`).addClass('active');
 }
 
 $(() => {
@@ -41,7 +42,7 @@ $(() => {
       switch (e.name) {
         case 'initialized':
           $('#timer-starter').removeAttr('disabled');
-          drawSlot(e.seq.length);
+          drawSlot(e.seq.length, 0);
           break;
         case 'started':
           $('#timer-starter').attr('disabled', 'disabled');
@@ -50,9 +51,10 @@ $(() => {
           $('#time-left').text(toFriendlyTime(e.tickLeft));
           break;
         case 'ended':
-          console.log('ended');
+          drawSlot(e.seq.length, e.cursor);
           break;
         case 'finally':
+          drawSlot(e.seq.length, e.cursor);
           $('#timer-starter').removeAttr('disabled');
           break;
       }

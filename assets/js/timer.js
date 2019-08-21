@@ -43,12 +43,16 @@ Timer = function () {
           t.counter = 0;
           if (t.seqCursor >= t.seq.length) {
             t.eventSubject.next({
+              seq: t.seq,
+              cursor: 0,
               name: 'finally'
             });
             t.reset();
           } else {
             t.eventSubject.next({
-              name: 'ended'
+              name: 'ended',
+              seq: t.seq,
+              cursor: t.seqCursor
             });
           }
         }

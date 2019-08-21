@@ -1,26 +1,55 @@
 .timer {
-    font-family: 'Mitr', sans-serif;
-    font-size: 80pt;
-    text-align: center;
-    vertical-align: middle;
+  font-family: 'Cousine', monospace;
+  font-size: 128pt;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 40px;
 }
 
 .navbar {
-    border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
 }
 
 .navbar-brand {
-    font-family: 'Mitr', sans-serif;
-    letter-spacing: 2px;
+  font-family: 'Mitr', sans-serif;
+  letter-spacing: 2px;
 }
 
 .app-name {
-    color: #ff5555;
-    font-weight: bold;
+  color: #ff5555;
+  font-weight: bold;
 }
 
 /* Theme overrides */
 
 .timer-player .btn-link {
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.time-slots {
+  z-index: 15;
+  text-align: center;
+  list-style: none;
+}
+
+.time-slots>.slot {
+  display: inline-block;
+  width: 40px;
+  height: 30px;
+  border-radius: 8px;
+  margin-left: 20px;
+  text-indent: -999px;
+  background-color: #98c39c;
+}
+
+.time-slots>.slot:first-child {
+  margin-left: 0px;
+}
+
+.time-slots>.slot.active {
+  background-color: #48894f;
+}
+
+.color-play {
+  color: #ffdf6b;
 }
