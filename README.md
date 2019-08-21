@@ -1,10 +1,10 @@
-# BAYO's Timer
+# bayo: Vanilla Timer
 
-A web-based timer application.
+A simple web-based timer application.
 
 ## Demo
 
-See [BAYO's Timer](https://bayo-timer.firebaseapp.com) for demo.
+See [bayo: Vanilla Timer](https://vanilla-timer.firebaseapp.com) for demo.
 
 ## License
 
