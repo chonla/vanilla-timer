@@ -48,6 +48,7 @@ function applyTimeSeries() {
     const timeSeq = parseTimeSeries(customTimeSeries);
     timer.set(timeSeq);
     $('#customTimeSeries').removeClass('is-invalid');
+    $('#customTimerModal').modal('hide');
   } else {
     $('#customTimeSeries').addClass('is-invalid');
   }
