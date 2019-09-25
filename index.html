@@ -25,11 +25,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#" id="presetDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Presets
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="presetDropdown">
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="60">1 min</a>
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="120">2 mins</a>
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="180">3 mins</a>
@@ -39,13 +39,24 @@
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="1800">30 mins</a>
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="2700">45 mins</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" role="setTimer" aria-dataset="3600">1 hour</a>
+              <a class="dropdown-item" href="#" role="setTimer" aria-dataset="3600">1 hr</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="5,4,3">5 secs &gt; 4 secs &gt; 3 secs</a>
               <a class="dropdown-item" href="#" role="setTimer" aria-dataset="300,300,300">5 mins &gt; 5 mins &gt; 5
                 mins</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" role="customTimer" data-toggle="modal" data-target="#customTimerModal">Custom...</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="recentDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Recently used
+            </a>
+            <div class="dropdown-menu" aria-labelledby="recentDropdown" id="recentDropdownItems">
+              <div class="dropdown-divider" id="recentDropdownItemsDivider"></div>
+              <a class="dropdown-item" href="#" role="clearRecent" id="clearRecent">Clear</a>
+              <a class="dropdown-item" href="#" aria-disabled="true" id="noRecent">None</a>
             </div>
           </li>
         </ul>
